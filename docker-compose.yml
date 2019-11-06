@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  backend-ocr:
+    build: ./backend/ocrApi
+    volumes:
+      - ./backend/ocrApi/app:/app
+    ports:
+      - 5001:80
+    command: /start-reload.sh
