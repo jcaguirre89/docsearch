@@ -1,6 +1,7 @@
 """
 Retrieve and process image with the tesseract API
 """
+import tempfile
 import requests
 import pytesseract
 from PIL import Image
@@ -8,7 +9,6 @@ from PIL import ImageFilter
 from io import BytesIO
 import cv2
 import numpy as np
-import tempfile
 from pdf2image import convert_from_bytes
 
 
