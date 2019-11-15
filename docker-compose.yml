@@ -8,3 +8,14 @@ services:
     ports:
       - 5001:80
     command: /start-reload.sh
+		depends:
+		  - db
+	db:
+		image: postgres:11
+		volumes:
+			- app-db-data:/var/lib/postgresql/data/pgdata
+		env_file:
+			- ./backend-db.env
+
+volumes:
+  app-db-data:
