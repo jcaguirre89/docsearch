@@ -1,6 +1,6 @@
 FROM tiangolo/uvicorn-gunicorn:python3.7
 RUN apt-get update \
-    && apt-get install -y tesseract-ocr \
+    && apt-get install -y tesseract-ocr-eng tesseract-ocr-spa \
     && apt-get install -y poppler-utils \
     && apt-get clean \
     && apt-get autoremove

@@ -12,28 +12,29 @@ import numpy as np
 from pdf2image import convert_from_bytes
 
 
-def _convert_pdf_to_image(filename):
+def convert_pdf_to_image(file: bytes):
     """ Returns a list of Image objects """
     print("Converting PDF to image")
     with tempfile.TemporaryDirectory() as path:
-        images = convert_from_bytes(filename, output_folder=path)
+        images = convert_from_bytes(file, output_folder=path)
     return images
 
 
-def parse_pdf(filename):
+def parse_pdf(file: bytes):
     """ Parses pdf file with tesseract """
     out = {}
-    images = _convert_pdf_to_image(filename)
+    images = convert_pdf_to_image(file)
     for idx, image in enumerate(images):
         print(f"Parsing page {idx}")
         out[f"page {idx}"] = parse_image(image)
     return out
 
 
-def parse_image(image):
+def parse_image(image, lang='eng'):
     """ convert PIL Image with tesseract """
     image = process_image(image)
-    return pytesseract.image_to_string(image)
+    print(f'language: {lang}')
+    return pytesseract.image_to_string(image, lang=lang)
 
 
 def process_image(image):
@@ -49,9 +50,9 @@ def get_image_from_url(url):
     return img
 
 
-def get_image_from_bytes(filename):
+def get_image_from_bytes(file: bytes):
     """ open image from file object as PIL object """
-    return Image.open(BytesIO(filename)).convert("L")
+    return Image.open(BytesIO(file)).convert("L")
 
 
 def get_image_from_file(filename):
