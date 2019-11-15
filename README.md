@@ -3,6 +3,15 @@
 ## About
 This project allows users to upload files and then search through them
 
+## Running locally
+```
+git clone git@github.com:jcaguirre89/docsearch.git
+cd docsearch
+docker-compose up --build
+```
+
+now go to `localhost:5001` for the OCR API
+
 ## (Planned) Tech stack
 - An ElasticSearch or PostgreSQL database with the indexed files to provide fast search
 - A data pipeline that receives uploaded files, sends the raw binary to S3, and 
